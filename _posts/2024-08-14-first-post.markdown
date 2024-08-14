@@ -17,7 +17,6 @@ I might also share some insights into some life experiences that I have had, and
 
 I hope you enjoy the content that I will be sharing here.
 
-
 ```python
 print("Hello World!")
 ```
