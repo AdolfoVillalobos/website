@@ -24,8 +24,8 @@ author:
 description: >- # this means to ignore newlines until "baseurl:"
   This is a blog where I share a bit about myself and my experiences 
   in the tech world. I hope you enjoy it!
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/website" # the subpath of your site, e.g. /blog
+url: "https://adolfovillalobos.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: AdolfVillalobos
 github_username:  AdolfoVillalobos
 
@@ -35,6 +35,8 @@ plugins:
   - jekyll-feed
   - jekyll-spaceship
   - jekyll-remote-theme
+
+port: 4002
 
 # Exclude from processing.
 # The following items will not be processed, by default.
