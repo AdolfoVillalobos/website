@@ -85,7 +85,7 @@ I also discovered a GitHub Action in the Heroku documentation that automatically
 
 With the app deployed, I could now check the status of my blog from anywhere. I set up a simple HTML page that displays the status and color of the blog:
 
-![Blog Status](assets/2024-08-23-final-result-status-page.png)
+![Blog Status](../assets/images/2024-08-23-final-result-status-page.png)
 
 ##### What’s Next?
 
