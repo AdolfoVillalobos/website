@@ -81,13 +81,22 @@ I also discovered a GitHub Action in the Heroku documentation that automatically
 
 **Note**: In the future, you should consider setting up a CI/CD pipeline to automate the deployment process and run tests and checks before deploying to production. Just sayin!.
 
+##### Viewing the Status Page
+
+With the app deployed, I could now check the status of my blog from anywhere. I set up a simple HTML page that displays the status and color of the blog:
+
+![Blog Status](assets/2024-08-23-final-result-status-page.png)
+
 ##### What’s Next?
 
 This is just the beginning. My plan is to expand this dashboard by adding checks for unread emails, monitoring social media inboxes, and even tracking whether I’ve paid my credit cards. The goal is to have a single page that gives me a quick overview of everything important in my life, all in one place.
 
 I know the app is pretty basic right now, but the important thing is that I shipped something. The inspiration I got from Pieter Levels was all about taking action, and I’m excited to continue building on this foundation.
 
+
+
 #### Conclusion
+
 In this first post of the series, I shared how I set up a basic Node.js app to monitor the status of my blog and deployed it to Heroku. This project is a step towards automating my daily routine, and I’m excited to see how it evolves.
 
 What would you automate if you had a personal dashboard? Let me know in the comments, and stay tuned for the next part of this series, where I’ll be adding more features to the dashboard!
