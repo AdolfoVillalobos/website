@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://adolfovillalobos.github.io/website/feed.xml" rel="self" type="application/atom+xml" /><link href="https://adolfovillalobos.github.io/website/" rel="alternate" type="text/html" /><updated>2024-08-23T04:13:03+00:00</updated><id>https://adolfovillalobos.github.io/website/feed.xml</id><title type="html">Adolfo’s blog</title><subtitle>This is a blog where I share a bit about myself and my experiences  in the tech world. I hope you enjoy it!</subtitle><author><name>Adolfo Villalobos</name></author><entry><title type="html">Building a Personal Dashboard: Automating Life’s Essential Checks – Part 1</title><link href="https://adolfovillalobos.github.io/website/nodejs/building/2024/08/23/creating-a-personal-status-dashboard.html" rel="alternate" type="text/html" title="Building a Personal Dashboard: Automating Life’s Essential Checks – Part 1" /><published>2024-08-23T03:37:00+00:00</published><updated>2024-08-23T03:37:00+00:00</updated><id>https://adolfovillalobos.github.io/website/nodejs/building/2024/08/23/creating-a-personal-status-dashboard</id><content type="html" xml:base="https://adolfovillalobos.github.io/website/nodejs/building/2024/08/23/creating-a-personal-status-dashboard.html"><![CDATA[<h4 id="introduction">Introduction</h4>
+<p>Although I’ve been programming in Python for years, I’ve always been curious about other languages and technologies.</p>
+<p>For a while now, I’ve been wanting to dive into <code>Node.js</code>, but I hadn’t found the right project to push me to start learning. Recently, I listened `o an inspiring episode of Lex Fridman’s podcast where <a href="https://youtu.be/oFtjKbXKqbg?si=HHh5lMkiMqoW0ejd">he interviewed Pieter Levels</a>, a digital nomad and developer known for his ability to ship products quickly. Pieter’s approach to development—focusing on solving problems fast and iterating later—really resonated with me. I even bought his book <a href="https://readmake.com/">readMake</a>. It made me realize that I don’t need to wait for the perfect idea or project to start coding. I just need to begin.</p>
+<p>With this in mind, I decided to combine my interest in Node.js with a practical need: <em>automating the essential checks I perform daily in my life</em>.</p>
+<p>This marks the beginning of a project to build a personal dashboard where I can monitor various aspects of my life. In this first post of the series, I’ll walk you through the initial step: setting up a simple Node.js app that checks the status of my personal blog.</p>
+<h4 id="why-automate-life-checks">Why Automate Life Checks?</h4>
+<p>We all have routine checks that we perform regularly—whether it’s ensuring our blog is up and running, checking for unread emails, or making sure we’ve paid our bills on time. These tasks can be tedious and easy to forget. By automating these checks, I can free up mental space and focus on more important things.</p>
+<p>For me, this project isn’t just about practicality; it’s also a personal challenge. Inspired by Pieter Levels, I wanted to prove to myself that I can ship something quickly that actually solves a problem, no matter how small. The app may not do much right now, but it’s up and running, and that’s a first step.</p>
+<h4 id="part-1-setting-up-a-blog-status-checker">Part 1: Setting Up a Blog Status Checker</h4>
+<h5 id="project-setup">Project Setup</h5>
+<p>To kick off this project, I decided to start with a simple check to monitor the uptime of my personal blog. This was a great way to get my hands dirty with Node.js and TypeScript.</p>
+<p>Here’s how I set up the project:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>status-page-ts
+<span class="nb">cd </span>status-page-ts
+npm init <span class="nt">-y</span>
+npm <span class="nb">install </span>typescript axios
+npx tsc <span class="nt">--init</span>
+</code></pre></div></div>
+<p>This initialized a Node.js project with TypeScript and installed <code>axios</code> for making HTTP requests.</p>
+<h5 id="writing-the-blog-status-check">Writing the Blog Status Check</h5>
+<p>Next, I wrote a simple script to check whether my blog is online. This script sends a request to the blog’s URL and returns whether the blog is up or down:</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">axios</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">checkBlogStatus</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://adolfovillalobos.github.io/website</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">status</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Online</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Offline</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">color</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">};</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">status</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Offline</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>This function uses <code>axios</code> to send a GET request to my blog. If the response is successful, it returns an “Online” status; otherwise, it returns “Offline”.</p>
+<h5 id="deploying-to-heroku">Deploying to Heroku</h5>
+<p>With the status check script working, I wanted to deploy it so that I could access it from anywhere. Inspired by Pieter’s rapid shipping philosophy, I chose Heroku for its simplicity and free tier.</p>
+<p>Here’s how I deployed the app:</p>
+<ol>
+<li><strong>Set Up Heroku</strong>: I installed the Heroku CLI, logged in, and created a new Heroku app.</li>
+<li><strong>Deploy the App</strong>: I pushed my code to Heroku, configured it to serve the status page, and made sure everything was running smoothly.</li>
+<li><strong>Set Up a Custom Domain</strong>: I configured my GoDaddy domain to point to the Heroku app, so I could access the status page at a more personalized URL.</li>
+</ol>
+<p><strong>Troubleshooting</strong>:
+I ran into a few issues along the way, like missing the <code>start</code> script in <code>package.json</code> and port binding errors. These were quickly resolved, and I documented the fixes in case they help anyone else.</p>
+<p>I also discovered a GitHub Action in the Heroku documentation that automatically deploys the app when I push to the <code>main</code> branch.</p>
+<p><strong>Note</strong>: In the future, you should consider setting up a CI/CD pipeline to automate the deployment process and run tests and checks before deploying to production. Just sayin!.</p>
+<h5 id="viewing-the-status-page">Viewing the Status Page</h5>
+<p>With the app deployed, I could now check the status of my blog from anywhere. I set up a simple HTML page that displays the status and color of the blog:</p>
+<p><img src="../assets/images/2024-08-23-final-result-status-page.png" alt="Blog Status" /></p>
+<h5 id="whats-next">What’s Next?</h5>
+<p>This is just the beginning. My plan is to expand this dashboard by adding checks for unread emails, monitoring social media inboxes, and even tracking whether I’ve paid my credit cards. The goal is to have a single page that gives me a quick overview of everything important in my life, all in one place.</p>
+<p>I know the app is pretty basic right now, but the important thing is that I shipped something. The inspiration I got from Pieter Levels was all about taking action, and I’m excited to continue building on this foundation.</p>
+<h4 id="conclusion">Conclusion</h4>
+<p>In this first post of the series, I shared how I set up a basic Node.js app to monitor the status of my blog and deployed it to Heroku. This project is a step towards automating my daily routine, and I’m excited to see how it evolves.</p>
+<p>What would you automate if you had a personal dashboard? Let me know in the comments, and stay tuned for the next part of this series, where I’ll be adding more features to the dashboard!</p>
+<hr />]]></content><author><name>Adolfo Villalobos</name></author><category term="nodejs" /><category term="building" /><summary type="html"><![CDATA[Introduction]]></summary></entry><entry><title type="html">First Post: Hello World!</title><link href="https://adolfovillalobos.github.io/website/python/algorithmic/2024/08/13/first-post.html" rel="alternate" type="text/html" title="First Post: Hello World!" /><published>2024-08-13T06:22:45+00:00</published><updated>2024-08-13T06:22:45+00:00</updated><id>https://adolfovillalobos.github.io/website/python/algorithmic/2024/08/13/first-post</id><content type="html" xml:base="https://adolfovillalobos.github.io/website/python/algorithmic/2024/08/13/first-post.html"><![CDATA[<p>In this first post I would like to introduce a bit of what the Blog will be about.</p>
+<p>It will be a blog in which I will share technical knowledge in different software and finance areas in which I have worked or just have an interest. I have been fortunate to work in several roles in the industry, all of them related to technology:</p>
+<ul>
+<li><code>Data Scientist</code></li>
+<li><code>Data Engineer</code></li>
+<li><code>Software Engineer</code></li>
+<li><code>Algorithmic Trader</code></li>
+</ul>
+<p>I might also share some insights into some life experiences that I have had, and how they have shaped my career and my life.</p>
+<p>I hope you enjoy the content that I will be sharing here.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"Hello World!"</span><span class="p">)</span>
+</code></pre></div></div>]]></content><author><name>Adolfo Villalobos</name></author><category term="python" /><category term="algorithmic" /><summary type="html"><![CDATA[In this first post I would like to introduce a bit of what the Blog will be about.]]></summary></entry></feed>
